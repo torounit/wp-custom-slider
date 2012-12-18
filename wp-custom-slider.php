@@ -1,14 +1,14 @@
 <?php
 /**
  * @package wp_custom_slider
- * @version 0.1
+ * @version 0.2
  */
 /*
 Plugin Name: WP Custom Slider
 Plugin URI: http://torounit.com
 Description: WP Custom Slider
 Author: Toro_Unit
-Version: 0.1
+Version: 0.2
 Author URI: http://torounit.com
 */
 
@@ -70,7 +70,7 @@ class wp_custom_slider {
 		}else {
 			$width = 960;
 		}
-		$size = apply_filters("wp_custom_slider_size",array( $width, 200 ));
+		$size = apply_filters("wp_custom_slider_size",array( $width, 350 ));
 		add_image_size("slide", $size[0], $size[1], true);
 	}
 
@@ -98,6 +98,8 @@ class wp_custom_slider {
 			if($slide->post_content) {
 				$captions["slide".$slide->ID] = $slide->post_content;
 				$title = 'title="#slide'.$slide->ID.'"';
+			}else{
+				$title = "";
 			}?>
 
 			<img src="<?php echo $img[0];?>" alt="" width="<?php echo $img[1];?>" height="<?php echo $img[2];?>" <?php echo $title;?> />
