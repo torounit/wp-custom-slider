@@ -1,4 +1,4 @@
 
     jQuery(window).load(function() {
-        jQuery('#wp_easy_slider').nivoSlider();
+        jQuery('#wp_custom_slider').nivoSlider();
     });

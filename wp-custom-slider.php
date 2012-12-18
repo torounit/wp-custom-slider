@@ -1,12 +1,12 @@
 <?php
 /**
- * @package WP_Easy_Slider
+ * @package wp_custom_slider
  * @version 0.1
  */
 /*
-Plugin Name: WP_Easy_Slider
+Plugin Name: WP Custom Slider
 Plugin URI: http://torounit.com
-Description: Add Easy Slider
+Description: WP Custom Slider
 Author: Toro_Unit
 Version: 0.1
 Author URI: http://torounit.com
@@ -14,9 +14,9 @@ Author URI: http://torounit.com
 
 
 
-class WP_Easy_Slider {
+class wp_custom_slider {
 
-	public $post_type = 'wp_easy_slider';
+	public $post_type = 'wp_custom_slider';
 
 	public $labels = array (
 			'name' => 'Slide',
@@ -36,8 +36,8 @@ class WP_Easy_Slider {
 
 	public function add_hooks() {
 
-		$this->post_type = apply_filters("wp_easy_slider_post_type", $this->post_type);
-		$this->labels = apply_filters("wp_easy_slider_labels", $this->labels);
+		$this->post_type = apply_filters("wp_custom_slider_post_type", $this->post_type);
+		$this->labels = apply_filters("wp_custom_slider_labels", $this->labels);
 		add_action('wp_loaded', array( $this, 'register_custom_post_type' ));
 		add_action("wp_loaded", array( $this, "enqueue" ));
 		add_action('after_setup_theme', array( $this, "set_image_size" ) , 100);
@@ -70,15 +70,15 @@ class WP_Easy_Slider {
 		}else {
 			$width = 960;
 		}
-		$size = apply_filters("wp_easy_slider_size",array( $width, 200 ));
+		$size = apply_filters("wp_custom_slider_size",array( $width, 200 ));
 		add_image_size("slide", $size[0], $size[1], true);
 	}
 
 	public function enqueue() {
-		wp_enqueue_style('nivo-slider', plugins_url('wp-easy-slider/nivo-slider/nivo-slider.css'), false, '1.0', 'all');
-		wp_enqueue_style('nivo-slider-default', plugins_url('wp-easy-slider/nivo-slider/themes/default/default.css'), false, '1.0', 'all');
-		wp_enqueue_script('nivo-slider', plugins_url('wp-easy-slider/nivo-slider/jquery.nivo.slider.pack.js'), array('jquery'), '1.0', false);
-		wp_enqueue_script('script', plugins_url('wp-easy-slider/script.js'), array('jquery','nivo-slider'), '1.0', false);
+		wp_enqueue_style('nivo-slider', plugins_url('wp-custom-slider/nivo-slider/nivo-slider.css'), false, '1.0', 'all');
+		wp_enqueue_style('nivo-slider-default', plugins_url('wp-custom-slider/nivo-slider/themes/default/default.css'), false, '1.0', 'all');
+		wp_enqueue_script('nivo-slider', plugins_url('wp-custom-slider/nivo-slider/jquery.nivo.slider.pack.js'), array('jquery'), '1.0', false);
+		wp_enqueue_script('script', plugins_url('wp-custom-slider/script.js'), array('jquery','nivo-slider'), '1.0', false);
 	}
 
 	public function slider($post_type = "") {
@@ -91,7 +91,7 @@ class WP_Easy_Slider {
 		?>
 
 		<div class="slider-wrapper theme-default">
-		<div id="wp_easy_slider">
+		<div id="wp_custom_slider">
 		<?php
 		foreach ($slides as $slide) {
 			$img = wp_get_attachment_image_src(get_post_thumbnail_id($slide->ID), "slide");
@@ -125,16 +125,16 @@ class WP_Easy_Slider {
 }
 
 
-function instance_wp_easy_slider() {
-	global $wp_easy_slider;
-	$wp_easy_slider = new WP_Easy_Slider();
-	$wp_easy_slider->add_hooks();
+function instance_wp_custom_slider() {
+	global $wp_custom_slider;
+	$wp_custom_slider = new wp_custom_slider();
+	$wp_custom_slider->add_hooks();
 }
-add_action("after_setup_theme", "instance_wp_easy_slider");
+add_action("after_setup_theme", "instance_wp_custom_slider");
 
 
-function wp_easy_slider($post_type ="") {
-	global $wp_easy_slider;
-	$wp_easy_slider->slider();
+function wp_custom_slider($post_type ="") {
+	global $wp_custom_slider;
+	$wp_custom_slider->slider();
 }
 
